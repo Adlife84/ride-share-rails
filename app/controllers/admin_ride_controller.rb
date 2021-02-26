@@ -261,15 +261,19 @@ class AdminRideController < ApplicationController
     else
       @ride.status = "approved"
     end
+    @ride.save
+
     if @ride.round_trip
       if !@second_ride.driver_id.nil?
         @second_ride.status = "scheduled"
       else
         @second_ride.status = "approved"
       end
+      @ride.save
     else
       return false
     end
+    
   end
 
   def rider_choose_save_location
