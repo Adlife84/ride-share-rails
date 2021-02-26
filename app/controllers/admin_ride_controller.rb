@@ -269,7 +269,7 @@ class AdminRideController < ApplicationController
       else
         @second_ride.status = "approved"
       end
-      @ride.save
+      @second_ride.save
     else
       return false
     end
