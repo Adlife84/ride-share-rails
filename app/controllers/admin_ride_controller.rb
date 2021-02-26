@@ -261,7 +261,6 @@ class AdminRideController < ApplicationController
     else
       @ride.status = "approved"
     end
-    @ride.save
 
     if @ride.round_trip
       if !@second_ride.driver_id.nil?
@@ -269,7 +268,6 @@ class AdminRideController < ApplicationController
       else
         @second_ride.status = "approved"
       end
-      @second_ride.save
     else
       return false
     end
