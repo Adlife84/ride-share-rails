@@ -96,13 +96,21 @@ git pull upstream master # to synchronize with the master repository.
 1. Do not make edits directly to the master branch. 
 Instead, create a feature branch using 
 ```bash
-git checkout -b # <featurename> 
+git checkout -b <featurename> 
 ```
-Note: If you forget, there are ways to save your changes and to get the master branch back the way it was. For example, if you have not committed changes, you can use git stash, then create the feature branch, then do git stash apply.
+Note: If you forget, there are ways to save your changes and to get the master branch back the way it was. For example: 
+1. If you have not committed changes, you can use
+```bash
+git stash 
+```
+then create the feature branch, then do 
+```bash
+git stash apply.
+```
 2. Work on the feature, periodically committing to your feature branch.
 3. Periodically push your commits to github, using
 ```bash
-git push origin # <featurename>
+git push origin <featurename>
 ```
 4. When the feature is complete, tested, and ready, commit and push it once more.
 5. Then, checkout the master branch. You need to get any changes that have been made by your coworkers on the project.
@@ -112,9 +120,8 @@ git pull upstream master # to get those latest changes.
 ```
 7. Then, 
 ```bash
-git checkout # <featurename> 
+git checkout <featurename> # to switch back to your feature branch.
 ```
-to switch back to your feature branch.
 8. Do 
 ```bash
 git merge master. # This will bring those changes into your feature branch.
@@ -128,7 +135,7 @@ git merge master. # This will bring those changes into your feature branch.
 15. Repeat this process until your feature branch has been merged.
 16. Checkout your master branch on your workstation. You can now delete your feature branch using
 ```bash
-git branch -d # <featurename>
+git branch -d <featurename>
 ```
 17. Do a 
 ```bash
@@ -158,22 +165,53 @@ bundle install
 
 ## Git Process for Features
 
-1. git checkout development (always start your new feature branch here)
-2. git pull origin development (make sure you are up to date)
-3. git checkout -b your-feature-name
+1. 
+```bash
+git checkout development # (always start your new feature branch here)
+```
+2. 
+```bash
+git pull origin development # (make sure you are up to date)
+```
+3. 
+```bash 
+git checkout -b your-feature-name
+```
 4. Develop your feature
 5. Add and commit your changes.
+```bash
+git add . # Additing any changes
+git commit -m "Describe what did you change"
+```
 6. Push your feature branch. This should be done periodically, even before you are done with your feature, so that you don’t lose your work.
+```bash
+git push
+```
 7. Test your feature, including Rspec testing. Make any changes necessary to make the tests pass.
 8. Commit and push your changes again.
-9. git checkout development (you need to merge in any changes that your colleagues have made in the meantime)
-10. git pull origin development
-11. git checkout your-feature-name
-12. git merge development (now, at this point, if anyone has made changes to the same files you changed, you will need to resolve merge conflicts)
+9. 
+```bash
+git checkout development # you need to merge in any changes that your colleagues have made in the meantime
+```
+10.
+```bash
+git pull origin development
+```
+11. 
+```bash
+git checkout your-feature-name
+```
+12. 
+```bash
+git merge development # now, at this point, if anyone has made changes to the same files you changed, you will need to resolve merge conflicts
+```
 13. resolve merge conflicts, if any, and add and commit your changes
 14. test again to make sure the merge conflict resolution did not break anything
-15. push your changes
-16. Do a pull request. The target of the pull request must be the development branch. Make @charlesvincentanderson and @jrmcgarvey as reviewers.
+15. Push your changes
+```bash
+git push
+```
+16. Do a pull request (PR). The target of the pull request must be the development branch. Make @charlesvincentanderson and @jrmcgarvey as reviewers.
 17. Chuck will review your code and may request changes.
 18. Make any necessary changes to the your-feature-name branch. Then add, commit, and push again.
 19. Once all required changes have been made, Chuck will merge your code.
