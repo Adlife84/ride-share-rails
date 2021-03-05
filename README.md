@@ -96,7 +96,7 @@ git pull upstream master # to synchronize with the master repository.
 1. Do not make edits directly to the master branch. 
 Instead, create a feature branch using 
 ```bash
-git checkout -b <featurename> 
+git checkout -b <featurename> # where <featurename> is name of your branch
 ```
 Note: If you forget, there are ways to save your changes and to get the master branch back the way it was. For example: 
 1. If you have not committed changes, you can use
@@ -105,12 +105,12 @@ git stash
 ```
 then create the feature branch, then do 
 ```bash
-git stash apply.
+git stash apply
 ```
 2. Work on the feature, periodically committing to your feature branch.
 3. Periodically push your commits to github, using
 ```bash
-git push origin <featurename>
+git push origin <featurename> # Where <featurename> is name of your branch
 ```
 4. When the feature is complete, tested, and ready, commit and push it once more.
 5. Then, checkout the master branch. You need to get any changes that have been made by your coworkers on the project.
@@ -122,7 +122,7 @@ git pull upstream master # to get those latest changes.
 ```bash
 git checkout <featurename> # to switch back to your feature branch.
 ```
-8. Do 
+8. Do merge with master
 ```bash
 git merge master. # This will bring those changes into your feature branch.
 ```
@@ -135,7 +135,7 @@ git merge master. # This will bring those changes into your feature branch.
 15. Repeat this process until your feature branch has been merged.
 16. Checkout your master branch on your workstation. You can now delete your feature branch using
 ```bash
-git branch -d <featurename>
+git branch -d <featurename> # where <featurename> is name of your branch
 ```
 17. Do a 
 ```bash
