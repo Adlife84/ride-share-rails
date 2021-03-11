@@ -119,11 +119,7 @@ class AdminRideController < ApplicationController
       return
     end
     when_ride_driver_is_assigned_change_status
-    if !@ride.save
-      flash.now[:error] = @ride.errors.full_messages.join("\n")
-      render 'new'
-      return
-    else
+    if @ride.save || @second_ride.save
       return unless round_trip_save
       rider_choose_save_location
       only_15_location_saves(organization)
@@ -133,6 +129,10 @@ class AdminRideController < ApplicationController
       end
       flash[:notice] = "Ride created for #{rider.full_name}"
       redirect_to admin_ride_path(@ride)
+      return
+    else
+      flash.now[:error] = @ride.errors.full_messages.join("\n")
+      render 'new'
       return
     end
   end
@@ -221,9 +221,11 @@ class AdminRideController < ApplicationController
       return
     end
     when_ride_driver_is_assigned_change_status
-    rider_choose_save_location
-    flash.notice = 'The ride information has been updated.'
-    redirect_to admin_ride_path(@ride)
+    if @ride.save 
+      rider_choose_save_location
+      flash.notice = 'The ride information has been updated.'
+      redirect_to admin_ride_path(@ride)
+    end
   end
 
   def approve
