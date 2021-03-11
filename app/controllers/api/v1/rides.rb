@@ -129,7 +129,7 @@
       params do
         requires :ride_id, type: String, desc: "ID of the ride"
       end
-      post "rides/:ride_id/accept" do
+      post "rides/:ride_id/scheduled" do
         begin
           ride = Ride.find(permitted_params[:ride_id])
         rescue ActiveRecord::RecordNotFound

@@ -16,8 +16,10 @@ class Admin::VehiclesController < ApplicationController
         flash.notice = "The vehicle information has been created"
         redirect_to admin_driver_path(params[:driver_id])
       else
-        flash.alert = @vehicle.errors.full_messages.to_sentence
-        redirect_to edit_admin_vehicle_path(params[:driver_id])
+        # The form is handling the errors. Turned of flash alerts error
+        # flash.alert = @vehicle.errors.full_messages.to_sentence
+        @driver =  Driver.find(params[:driver_id])
+        render "edit"
       end
     else
       flash.alert = "You cannot create vehicles outside your organization"
@@ -28,6 +30,7 @@ class Admin::VehiclesController < ApplicationController
 
   def edit
     @vehicle = Vehicle.find(params[:id])
+    @driver = Driver.find(@vehicle.driver_id)
     if current_user.organization_id != @vehicle.driver.organization_id
       flash.notice = "You are not authorized to view that vehicle"
       redirect_to admin_drivers_path
@@ -36,12 +39,14 @@ class Admin::VehiclesController < ApplicationController
 
   def update
     @vehicle = Vehicle.find(params[:id])
+    @driver = @vehicle.driver
       if current_user.organization_id == @vehicle.driver.organization_id
         if @vehicle.update(vehicle_params)
           flash.notice = "The vehicle information has been updated"
           redirect_to admin_driver_path(@vehicle.driver_id)
         else
-          flash.alert = @vehicle.errors.full_messages.to_sentence
+          # The form is handling the errors. Turned of flash alerts error
+          # flash.alert = @vehicle.errors.full_messages.to_sentence
           render "edit"
         end
       else

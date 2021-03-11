@@ -1,9 +1,10 @@
-<% if controller.action_name == 'new' %>
+<% if controller.action_name == 'new'  || controller.action_name == 'create' %>
   <%url = admin_driver_vehicles_path(driver_id: @driver) %>
 <% else %>
   <%url = admin_vehicle_path(id: @vehicle) %>
 <% end %>
-<%= form_with(model: [@driver,@vehicle], url: url)  do  |form| %>
+
+<%= form_with(model: [@driver,@vehicle], url: url, local: true)  do  |form| %>
 
   <% if @vehicle.errors.any? %>
     <div id="error_explanation">
@@ -47,7 +48,7 @@
 
     <div class="form-group col-md-5">
       <%= form.label :car_state %><br>
-      <%= form.select :car_state, options_for_select(us_states), {}, class: 'form-control' %>
+      <%= form.select :car_state, options_for_select(us_states, selected: @vehicle.car_state), {}, class: 'form-control' %>
     </div>
   </div>
 
@@ -95,7 +96,7 @@
 
   <div class="row">
     <div  class="form-group col-md-1 offset-md-1">
-      <%= link_to 'Back', :back, class:"btn btn-primary" %>
+      <%= link_to 'Back', admin_driver_path(@driver.id), class:"btn btn-primary" %>
     </div>
     <div  class="form-group col-md-1 offset-md-7">
       <%= form.submit class:"btn btn-primary" %>
